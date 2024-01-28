@@ -1,0 +1,141 @@
+* {
+    /* Smooth scroll instead of jump */
+    scroll-behavior: smooth;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+/* Global Variables */
+:root {
+    --color-dark-text: hsla(0, 0%, 0%, 0.87);
+    --color-light-text: #FAFAFA;
+    --color-black: hsla(0, 0%, 0%, 0.87);
+    --color-white: #FAFAFA;
+}
+
+body,
+html {
+    /* Layout */
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* Typography */
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 100%;
+    line-height: 1.5rem;
+}
+
+/* Class for visually hide text for only screen readers to read */
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+h1 {
+    font-size: 2rem;
+    line-height: 2.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+    padding-left: 2rem;
+}
+
+h2 {
+    font-size: 1.5625rem;
+    line-height: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+}
+
+h3 {
+    font-size: 1.25rem;
+    line-height: 1.5rem;
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+}
+
+h4 {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+}
+
+p {
+    font-size: 1rem;
+    line-height: 1.5rem;
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+}
+
+.caption {
+    font-size: 0.8125rem;
+    line-height: 1rem;
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+}
+
+.tinytext {
+    font-size: 0.6875rem;
+    line-height: 1rem;
+    margin-top: 0rem;
+    margin-bottom: 0rem;
+}
+
+a,
+a:hover,
+a:focus,
+a:active {
+    text-decoration: none;
+    color: black;
+}
+
+main {}
+
+ul {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    padding-inline-start: 0px;
+}
+
+.unstyle {
+    list-style-type: none
+}
+
+img {
+    width: 100%;
+    height: auto;
+}
+
+a {
+    display: flex;
+    background-color: rgba(15, 94, 116, 0.047);
+    padding: 1em;
+    margin: 1em;
+    max-width: 32em;
+}
+
+/* Breakpoint for mobile devices */
+@media (max-width: 240px) {}
+
+/* Breakpoint for mobile devices */
+@media (max-width: 480px) and (min-width: 241px) {}
+
+/* Breakpoint for tablet devices */
+@media (max-width: 768px) and (min-width: 481px) {}
+
+/* Breakpoint for laptop devices */
+@media (max-width: 1024px) and (min-width: 769px) {}
+
+/* Breakpoint for desktop devices */
+@media (min-width: 1440px) {}
