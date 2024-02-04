@@ -1,0 +1,233 @@
+/*============================================= Global ============================================*/
+
+body,
+html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Roboto';
+}
+
+:root {
+    --color-dark-blueish-grey: #1F2937;
+    --color-white: #F9FAF8;
+    --color-lightgrey: #E5E7EB;
+    --color-blue: #3882F6;
+}
+
+button {
+    display: inline-block;
+    background-color: var(--color-blue);
+    color: var(--color-lightgrey);
+    border: none;
+    border-radius: 7px;
+    padding: 8px 30px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+
+/*============================================ Header ===========================================*/
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-align: center;
+    padding: 10px 15% 10px 15%;
+    background-color: var(--color-dark-blueish-grey);
+}
+
+.header-logo img {
+    display: none;
+    /*Turn on if Logo image should be used*/
+}
+
+.header-logo p {
+    /*Trun off if Logo image should be used*/
+    font-size: 24px;
+    color: var(--color-white);
+    margin: 0px;
+}
+
+.header-topnav ul {
+    display: flex;
+    gap: 35px;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.header-topnav a {
+    color: var(--color-white);
+    text-decoration: none;
+}
+
+/*============================================= Main ============================================*/
+
+/*----------------------------------------  Start Section  --------------------------------------*/
+
+/*!!! NOT RESPONSIVE !!!*/
+
+.start {
+    display: flex;
+    gap: 15px;
+    padding: 120px 15% 5% 15%;
+    background-color: #1F2937;
+}
+
+.start-section-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+    /*Allows relative height and width to 2nd child container*/
+    padding-bottom: 5px;
+}
+
+.start-section-left .headline {
+    font-size: 48px;
+    font-weight: 800;
+    color: var(--color-white);
+    text-align: left;
+    margin: 0;
+    line-height: 1.0;
+    /*Remove weird space above text default value: normal*/
+}
+
+.start-section-left p {
+    font-size: 18px;
+    text-align: left;
+    margin: 5px 0 10px 0;
+    color: var(--color-lightgrey);
+}
+
+.start-section-left button {
+    align-self: flex-start;
+}
+
+.start-section-right {
+    flex: 1;
+    /*Allows relative height and width to 1st child container*/
+}
+
+.start img {
+    width: 100%;
+    /*Responsive image size*/
+    height: auto;
+}
+
+/*-----------------------------------------  Info Section  --------------------------------------*/
+
+/*!!! NOT FULLY RESPONSIVE !!!*/
+
+.info {
+    padding: 30px 20% 5% 20%;
+}
+
+.info .headline {
+    text-align: center;
+    font-size: 36px;
+    font-weight: 900;
+    color: var(--color-dark-blueish-grey);
+}
+
+.info .container {
+    display: flex;
+    justify-content: center;
+}
+
+.info .container img {
+    width: 150px;
+    border-style: solid;
+    border-width: 3px;
+    border-color: var(--color-blue);
+    border-radius: 15px;
+}
+
+.info .container figcaption {
+    color: var(--color-dark-blueish-grey);
+    text-align: justify;
+    text-align-last: center;
+}
+
+/*-----------------------------------------  Quote Section  --------------------------------------*/
+
+/*!!! NOT FULLY RESPONSIVE !!!*/
+
+.testimonial {
+    display: flex;
+    justify-content: center;
+    background-color: var(--color-lightgrey);
+}
+
+.testimonial .container {
+    width: 900px;
+    text-align: left;
+    font-size: 36px;
+    font-weight: 100;
+    font-style: italic;
+    color: var(--color-dark-blueish-grey);
+}
+
+.testimonial .container .author {
+    text-align: right;
+    font-size: 24px;
+    font-weight: 600;
+    font-style: normal;
+    color: var(--color-dark-blueish-grey);
+}
+
+/*-----------------------------------------  Action Section  --------------------------------------*/
+
+/*!!! NOT FULLY RESPONSIVE !!!*/
+
+.callToAction {
+    padding: 75px 15% 75px 15%;
+}
+
+.callToAction .container {
+    display: flex;
+    background-color: var(--color-blue);
+    border-radius: 8px;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.callToAction .container .headline {
+    font-size: 24px;
+    font-weight: 500;
+    color: var(--color-white);
+    margin: 35px 0 0 0;
+}
+
+.callToAction .container p {
+    color: var(--color-lightgrey);
+    margin: 0 0 35px 0;
+}
+
+.callToAction button {
+    display: inline-block;
+    color: var(--color-white);
+    border-style: solid;
+    border-width: 2px;
+    border-color: var(--color-white);
+    border-radius: 10px;
+}
+
+/*============================================ Footer ============================================*/
+
+footer {
+    background-color: var(--color-dark-blueish-grey);
+    padding: 15px;
+}
+
+footer p {
+    color: var(--color-lightgrey);
+    font-size: 16px;
+    text-align: center;
+}
