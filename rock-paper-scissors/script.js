@@ -1,6 +1,6 @@
 "use strict"
 
-console.log("Rock Game");
+console.log("Rock the Game");
 
 function getComputerChoice() {
     const computerChoice = Math.floor(Math.random() * 3);
@@ -17,21 +17,19 @@ function getPlayerChoice() {
 }
 
 function playRound(playerSelection, computerSelection) {
-    computerSelection = getComputerChoice();
-    playerSelection = getPlayerChoice();
+
     if (playerSelection === computerSelection) {
         return `It's a tie!`
-    } else if (playerSelection === `rock` && computerSelection === `paper`) {
-        return `You Lose! Paper beats Rock`;
-    } else if (playerSelection === `rock` && computerSelection === `scissors`) {
-        return `You Win! Rock beats Scissors`;
-    } else if (playerSelection === `paper` && computerSelection === `rock`) {
-        return `You Win! Paper beats Rock`;
-    } else if (playerSelection === `paper` && computerSelection === `scissors`) {
-        return `You Lose! Scissors beats Paper`
-    } else if (playerSelection === `scissors` && computerSelection === `rock`) {
-        retrun`You Lose! Rock beats Scissors`
-    } else if (playerSelection === `scissors` && computerSelection === `paper`) {
-        retrun`You Win! Scissory beats Paper`
+    }
+    else if ((playerSelection === `rock` && computerSelection === `paper`) ||
+        (playerSelection === `paper` && computerSelection === `scissors`) ||
+        (playerSelection === `scissors` && computerSelection === `rock`)) {
+        return `You Lose! ${computerSelection} beats ${playerSelection}`;
+    }
+    else if ((playerSelection === `rock` && computerSelection === `scissors`) ||
+        (playerSelection === `paper` && computerSelection === `rock`) ||
+        (playerSelection === `scissors` && computerSelection === `paper`)) {
+        return `You Win! ${playerSelection} beats ${computerSelection}`;
     }
 }
+
