@@ -16,7 +16,7 @@ function getPlayerChoice() {
     } else return null;
 }
 
-function playGame(playerSelection, computerSelection) {
+function playRound(playerSelection, computerSelection) {
     computerSelection = getComputerChoice();
     playerSelection = getPlayerChoice();
     if (playerSelection === computerSelection) {
