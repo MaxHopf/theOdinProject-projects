@@ -29,6 +29,13 @@ html {
     line-height: 1.5rem;
 }
 
+body {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 #canvas {
     display: flex;
     flex-direction: column;
