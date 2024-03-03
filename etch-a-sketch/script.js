@@ -3,7 +3,7 @@
 const canvas = document.querySelector('#canvas');
 const gridSizeBtn = document.querySelector('#gridSizeBtn')
 
-gridSizeBtn.addEventListener('click', getUserInput);
+gridSizeBtn.addEventListener('click', rebuildCanvasGrid);
 
 buildCanvasGrid();
 
@@ -27,12 +27,16 @@ function buildCanvasGrid(gridSize = 2) {
     }
 }
 
+function rebuildCanvasGrid() {
+    removeCanvas(canvas);
+    buildCanvasGrid(getUserInput());
+}
+
 function removeCanvas(canvas) {
     while (canvas.firstChild) {
         canvas.removeChild(canvas.firstChild);
     }
 }
-
 
 function hoverInteraction(pixel) {
     pixel.addEventListener('mouseenter', function (e) {
@@ -56,7 +60,6 @@ function getUserInput() {
             isValid = true;
         }
     }
-
     return userInput;
 }
 
