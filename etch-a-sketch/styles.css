@@ -1,0 +1,35 @@
+/* Universal Selector used to target all Elements */
+* {
+    /* Smooth scroll instead of jump */
+    scroll-behavior: smooth;
+    /* Include padding and border to width and height property for more intuitive calculation */
+    box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    /* Layout */
+    margin: 0;
+    padding: 0;
+}
+
+/* Root Element Selector used to define Global Variables */
+:root {
+    --color-dark-text: hsla(0, 0%, 0%, 0.87);
+    --color-light-text: #FAFAFA;
+    --color-black: hsla(0, 0%, 0%, 0.87);
+    --color-white: #FAFAFA;
+}
+
+/* HTML is usually the root element */
+html {
+    /* Layout */
+    height: 100%;
+    /* Typography */
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 100%;
+    line-height: 1.5rem;
+}
+
+#canvas {
+    display: flex;
+    flex-direction: column;
+}
