@@ -1,37 +1,42 @@
 "use strict"
 
-let canvasGridSize = 16;
-
 const canvas = document.querySelector('#canvas');
 const gridSizeBtn = document.querySelector('#gridSizeBtn')
 
+gridSizeBtn.addEventListener('click', getUserInput);
+
+buildCanvasGrid();
 
 
-for (let y = 0; y <= 16; y++) {
-    const gridRow = document.createElement('div');
-    gridRow.setAttribute('style', 'display: flex; flex-direction: row;')
-    gridRow.classList.add('row');
+function buildCanvasGrid(gridSize = 2) {
+    for (let y = 0; y < gridSize; y++) {
+        const gridRow = document.createElement('div');
+        gridRow.setAttribute('style', 'height: 100%; display: flex; flex-direction: row;')
+        gridRow.classList.add('row');
 
-    for (let x = 0; x <= 16; x++) {
-        const pixel = document.createElement('div');
-        pixel.setAttribute('style', 'height: 24px; width: 24px; background-color: red');
-        pixel.classList.add('pixel');
+        for (let x = 0; x < gridSize; x++) {
+            const pixel = document.createElement('div');
+            pixel.setAttribute('style', 'height: 100%; width: 100%; background-color: red');
+            pixel.classList.add('pixel');
 
-        pixel.addEventListener('mouseenter', function (e) {
-            e.target.style.background = 'blue';
-        });
-        pixel.addEventListener('mouseleave', function (e) {
-            e.target.style.background = 'red';
-        });
+            hoverInteraction(pixel);
 
-        gridRow.appendChild(pixel);
+            gridRow.appendChild(pixel);
+        }
+        canvas.appendChild(gridRow);
     }
-    canvas.appendChild(gridRow);
 }
 
+function hoverInteraction(pixel) {
+    pixel.addEventListener('mouseenter', function (e) {
+        e.target.style.background = 'blue';
+    });
+    pixel.addEventListener('mouseleave', function (e) {
+        e.target.style.background = 'red';
+    });
+}
 
-
-gridSizeBtn.addEventListener('click', () => {
+function getUserInput() {
     let userInput;
     let isValid = false;
 
@@ -46,5 +51,6 @@ gridSizeBtn.addEventListener('click', () => {
     }
 
     return userInput;
-});
+}
+
 
