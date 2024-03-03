@@ -11,7 +11,17 @@ for (let y = 0; y <= 16; y++) {
         const pixel = document.createElement('div');
         pixel.setAttribute('style', 'height: 24px; width: 24px; background-color: red');
         pixel.classList.add('pixel');
+
+        pixel.addEventListener('mouseenter', function (e) {
+            e.target.style.background = 'blue';
+        });
+        pixel.addEventListener('mouseleave', function (e) {
+            e.target.style.background = 'red';
+        });
+
         gridRow.appendChild(pixel);
     }
     canvas.appendChild(gridRow);
 }
+
+
