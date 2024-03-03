@@ -27,6 +27,13 @@ function buildCanvasGrid(gridSize = 2) {
     }
 }
 
+function removeCanvas(canvas) {
+    while (canvas.firstChild) {
+        canvas.removeChild(canvas.firstChild);
+    }
+}
+
+
 function hoverInteraction(pixel) {
     pixel.addEventListener('mouseenter', function (e) {
         e.target.style.background = 'blue';
