@@ -2,17 +2,20 @@
 
 const display = document.querySelector('#display');
 const digits = document.querySelectorAll('.digit');
+const operator = document.querySelectorAll('.operator');
 const equals = document.querySelector('#equals');
 
-const number = [];
+const digitArray = [];
 
 digits.forEach(digit => {
     digit.addEventListener('click', () => {
-        number.push(digit.id);
+        digitArray.push(digit.id);
+        let number = parseInt(digitArray.reduce((number, digit) => number + digit));
         display.textContent = number;
-        console.log(number);
     });
 });
+
+
 
 
 function add(x, y) {
