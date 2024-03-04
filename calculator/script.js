@@ -1,6 +1,19 @@
 "use strict";
 
 const display = document.querySelector('#display');
+const digits = document.querySelectorAll('.digit');
+const equals = document.querySelector('#equals');
+
+const number = [];
+
+digits.forEach(digit => {
+    digit.addEventListener('click', () => {
+        number.push(digit.id);
+        display.textContent = number;
+        console.log(number);
+    });
+});
+
 
 function add(x, y) {
     let z = null;
