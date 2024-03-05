@@ -1,7 +1,69 @@
-body,
-html {
-    height: 100%;
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
+
+html {
+    height: 100%;
+}
+
+
+body {
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 40px;
+}
+
+#calculator {
+    background-color: darkgray;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border: 8px solid black;
+    border-radius: 16px;
+    gap: 4px;
+    padding: 8px;
+}
+
+button.key {
+    padding: 16px;
+    font-size: 32px;
+    border: 0px solid darkslategrey;
+    border-radius: 8px;
+    opacity: 0.8;
+}
+
+button:active {
+    border-bottom: 0px !important;
+    border-top: 4px solid darkgray;
+}
+
+button:hover {
+    opacity: 1;
+}
+
+div#display {
+    padding: 24px;
+    grid-column: span 4;
+    text-align: right;
+    background-color: rgb(213, 225, 233);
+    border-radius: 8px;
+}
+
+button#clear {
+    background-color: brown;
+    border-bottom: 4px solid rgb(47, 12, 12);
+}
+
+button.digit {
+    background-color: cadetblue;
+    border-bottom: 4px solid rgb(31, 51, 52);
+}
+
+button.operator,
+#equals {
+    background-color: chocolate;
+    border-bottom: 4px solid rgb(55, 28, 8);
 }
