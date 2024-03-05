@@ -2,19 +2,50 @@
 
 const display = document.querySelector('#display');
 const digits = document.querySelectorAll('.digit');
-const operator = document.querySelectorAll('.operator');
+const operators = document.querySelectorAll('.operator');
 const equals = document.querySelector('#equals');
 
-const digitArray = [];
+let digitArray = [];
+
+const mathOperation = {
+    numbers: [],
+    operant: null,
+    display: []
+}
+
+function displayInput() {
+    display.textContent = mathOperation.display.join('');
+}
+
 
 digits.forEach(digit => {
     digit.addEventListener('click', () => {
+        mathOperation.display.push(digit.id);
+        displayInput();
+
         digitArray.push(digit.id);
-        let number = parseInt(digitArray.reduce((number, digit) => number + digit));
-        display.textContent = number;
     });
 });
 
+operators.forEach(operator => {
+    operator.addEventListener('click', () => {
+        mathOperation.display.push(` ${operator.textContent} `);
+        displayInput();
+
+        let number = parseInt(digitArray.reduce((number, digit) => number + digit));
+        mathOperation.numbers.push(number);
+        digitArray = [];
+
+
+
+        mathOperation.operant = operator.id;
+        console.log(mathOperation);
+    });
+});
+
+equals.addEventListener('click', () => {
+
+});
 
 
 
