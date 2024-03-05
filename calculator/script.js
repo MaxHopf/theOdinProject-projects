@@ -4,15 +4,18 @@ const display = document.querySelector('#display');
 const digits = document.querySelectorAll('.digit');
 const operators = document.querySelectorAll('.operator');
 const equals = document.querySelector('#equals');
+const clearAC = document.querySelector('#clear');
 
-let digitArray = [];
+let digitInputArray = [];
 
-const mathOperation = {
+let mathOperation = {
     numbers: [],
     operant: null,
     display: [],
     result: null
 }
+
+
 
 function displayInput(content) {
     mathOperation.display.push(content)
@@ -21,20 +24,15 @@ function displayInput(content) {
 function displayResult(result) {
     mathOperation.display.push(result)
     display.textContent = mathOperation.display.join('');
-
 }
 
-function setDigit(digit) {
-    digitArray.push(digit);
-}
-
-function getNumber(digitArray) {
-    const number = parseInt(digitArray.reduce((number, digit) => number + digit));
+function getNumber(digitInputArray) {
+    const number = parseInt(digitInputArray.reduce((number, digit) => number + digit));
     mathOperation.numbers.push(number);
 }
 
 function clearDigitCache() {
-    digitArray = [];
+    digitInputArray = [];
 }
 
 function getResult(num1, num2, operant) {
@@ -55,12 +53,20 @@ function getResult(num1, num2, operant) {
         console.log("Error");
 }
 
+function clear() {
+    clearDigitCache();
+    mathOperation.display = [];
+    displayInput('');
+}
+
 
 digits.forEach(digit => {
     digit.addEventListener('click', () => {
-        displayInput(digit.id);
+        digitInputArray.push(digit.id);
 
-        setDigit(digit.id);
+
+
+        displayInput(digit.id);
     });
 });
 
@@ -68,7 +74,7 @@ operators.forEach(operator => {
     operator.addEventListener('click', () => {
         displayInput(` ${operator.textContent} `);
 
-        getNumber(digitArray);
+        getNumber(digitInputArray);
         clearDigitCache();
 
         mathOperation.operant = operator.id;
@@ -79,19 +85,18 @@ operators.forEach(operator => {
 equals.addEventListener('click', () => {
     displayInput(` ${equals.textContent} `);
 
-    getNumber(digitArray);
+    getNumber(digitInputArray);
     clearDigitCache();
 
     const result = getResult(mathOperation.numbers[mathOperation.numbers.length - 2],
         mathOperation.numbers[mathOperation.numbers.length - 1],
         mathOperation.operant);
-    console.log(getResult(mathOperation.numbers[mathOperation.numbers.length - 2],
-        mathOperation.numbers[mathOperation.numbers.length - 1],
-        mathOperation.operant));
     displayResult(result);
 });
 
-
+clearAC.addEventListener('click', () => {
+    clear();
+});
 
 function add(x, y) {
     let z = null;
