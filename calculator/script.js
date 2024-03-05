@@ -13,15 +13,15 @@ const mathOperation = {
     display: []
 }
 
-function displayInput() {
+function displayInput(content) {
+    mathOperation.display.push(content)
     display.textContent = mathOperation.display.join('');
 }
 
 
 digits.forEach(digit => {
     digit.addEventListener('click', () => {
-        mathOperation.display.push(digit.id);
-        displayInput();
+        displayInput(digit.id);
 
         digitArray.push(digit.id);
     });
@@ -29,8 +29,7 @@ digits.forEach(digit => {
 
 operators.forEach(operator => {
     operator.addEventListener('click', () => {
-        mathOperation.display.push(` ${operator.textContent} `);
-        displayInput();
+        displayInput(` ${operator.textContent} `);
 
         let number = parseInt(digitArray.reduce((number, digit) => number + digit));
         mathOperation.numbers.push(number);
