@@ -10,7 +10,8 @@ let digitArray = [];
 const mathOperation = {
     numbers: [],
     operant: null,
-    display: []
+    display: [],
+    result: null
 }
 
 function displayInput(content) {
@@ -18,12 +19,43 @@ function displayInput(content) {
     display.textContent = mathOperation.display.join('');
 }
 
+function setDigit(digit) {
+    digitArray.push(digit);
+}
+
+function getNumber(digitArray) {
+    const number = parseInt(digitArray.reduce((number, digit) => number + digit));
+    mathOperation.numbers.push(number);
+}
+
+function clearDigitCache() {
+    digitArray = [];
+}
+
+function getResult(num1, num2, operant) {
+    if (operant == 'add') {
+        console.log(add(num1, num2));
+        return add(num1, num2);
+    }
+    else if (operant == 'substract') {
+        console.log(substract(num1, num2));
+        return substract(num1, num2);
+    }
+    else if (operant == 'multiply') {
+        return multiply(num1, num2);
+    }
+    else if (operant == 'divide') {
+        return divide(num1, num2);
+    } else
+        console.log("Error");
+}
+
 
 digits.forEach(digit => {
     digit.addEventListener('click', () => {
         displayInput(digit.id);
 
-        digitArray.push(digit.id);
+        setDigit(digit.id);
     });
 });
 
@@ -31,11 +63,8 @@ operators.forEach(operator => {
     operator.addEventListener('click', () => {
         displayInput(` ${operator.textContent} `);
 
-        let number = parseInt(digitArray.reduce((number, digit) => number + digit));
-        mathOperation.numbers.push(number);
-        digitArray = [];
-
-
+        getNumber(digitArray);
+        clearDigitCache();
 
         mathOperation.operant = operator.id;
         console.log(mathOperation);
@@ -43,7 +72,17 @@ operators.forEach(operator => {
 });
 
 equals.addEventListener('click', () => {
+    displayInput(` ${equals.textContent} `);
 
+    getNumber(digitArray);
+    clearDigitCache();
+
+    getResult(mathOperation.numbers[mathOperation.numbers.length - 2],
+        mathOperation.numbers[mathOperation.numbers.length - 1],
+        mathOperation.operant);
+    console.log(getResult(mathOperation.numbers[mathOperation.numbers.length - 2],
+        mathOperation.numbers[mathOperation.numbers.length - 1],
+        mathOperation.operant));
 });
 
 
