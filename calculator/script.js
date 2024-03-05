@@ -18,6 +18,11 @@ function displayInput(content) {
     mathOperation.display.push(content)
     display.textContent = mathOperation.display.join('');
 }
+function displayResult(result) {
+    mathOperation.display.push(result)
+    display.textContent = mathOperation.display.join('');
+
+}
 
 function setDigit(digit) {
     digitArray.push(digit);
@@ -77,12 +82,13 @@ equals.addEventListener('click', () => {
     getNumber(digitArray);
     clearDigitCache();
 
-    getResult(mathOperation.numbers[mathOperation.numbers.length - 2],
+    const result = getResult(mathOperation.numbers[mathOperation.numbers.length - 2],
         mathOperation.numbers[mathOperation.numbers.length - 1],
         mathOperation.operant);
     console.log(getResult(mathOperation.numbers[mathOperation.numbers.length - 2],
         mathOperation.numbers[mathOperation.numbers.length - 1],
         mathOperation.operant));
+    displayResult(result);
 });
 
 
