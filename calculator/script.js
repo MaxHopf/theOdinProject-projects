@@ -6,7 +6,9 @@ const operators = document.querySelectorAll('.operator');
 const equals = document.querySelector('#equals');
 const clearAC = document.querySelector('#clear');
 
-let digitInputArray = [];
+const inputHistory = [];
+
+let inputArray = [];
 
 let mathOperation = {
     numbers: [],
@@ -15,24 +17,71 @@ let mathOperation = {
     result: null
 }
 
+digits.forEach(digit => {
+    digit.addEventListener('click', () => {
+        inputArray.push(digit.id);
+        displayInput(digit.id);
 
 
-function displayInput(content) {
-    mathOperation.display.push(content)
-    display.textContent = mathOperation.display.join('');
+
+        inputHistory.push(digit.id);
+    });
+});
+
+operators.forEach(operator => {
+    operator.addEventListener('click', () => {
+
+        displayInput(` ${operator.textContent} `);
+
+        getNumber(inputArray);
+        clearDigitCache();
+
+        mathOperation.operant = operator.id;
+        console.log(mathOperation);
+    });
+});
+
+equals.addEventListener('click', () => {
+    displayInput(` ${equals.textContent} `);
+
+    getNumber(inputArray);
+    clearDigitCache();
+
+    const result = getResult(mathOperation.numbers[mathOperation.numbers.length - 2],
+        mathOperation.numbers[mathOperation.numbers.length - 1],
+        mathOperation.operant);
+    displayResult(result);
+});
+
+clearAC.addEventListener('click', () => {
+    clear();
+});
+
+function displayInput(pressedKey) {
+
+    if (!isNaN(Number(pressedKey))) {
+        mathOperation.display.push(pressedKey);
+        display.textContent = mathOperation.display.join('');
+    } else {
+        mathOperation.display = [];
+    }
+
+
+    //mathOperation.display.push(pressedKey)
 }
+
 function displayResult(result) {
     mathOperation.display.push(result)
     display.textContent = mathOperation.display.join('');
 }
 
-function getNumber(digitInputArray) {
-    const number = parseInt(digitInputArray.reduce((number, digit) => number + digit));
+function getNumber(inputArray) {
+    const number = parseInt(inputArray.reduce((number, digit) => number + digit));
     mathOperation.numbers.push(number);
 }
 
 function clearDigitCache() {
-    digitInputArray = [];
+    inputArray = [];
 }
 
 function getResult(num1, num2, operant) {
@@ -58,45 +107,6 @@ function clear() {
     mathOperation.display = [];
     displayInput('');
 }
-
-
-digits.forEach(digit => {
-    digit.addEventListener('click', () => {
-        digitInputArray.push(digit.id);
-
-
-
-        displayInput(digit.id);
-    });
-});
-
-operators.forEach(operator => {
-    operator.addEventListener('click', () => {
-        displayInput(` ${operator.textContent} `);
-
-        getNumber(digitInputArray);
-        clearDigitCache();
-
-        mathOperation.operant = operator.id;
-        console.log(mathOperation);
-    });
-});
-
-equals.addEventListener('click', () => {
-    displayInput(` ${equals.textContent} `);
-
-    getNumber(digitInputArray);
-    clearDigitCache();
-
-    const result = getResult(mathOperation.numbers[mathOperation.numbers.length - 2],
-        mathOperation.numbers[mathOperation.numbers.length - 1],
-        mathOperation.operant);
-    displayResult(result);
-});
-
-clearAC.addEventListener('click', () => {
-    clear();
-});
 
 function add(x, y) {
     let z = null;
