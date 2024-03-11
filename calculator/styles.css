@@ -67,3 +67,9 @@ button.operator,
     background-color: chocolate;
     border-bottom: 4px solid rgb(55, 28, 8);
 }
+
+.active {
+    background-color: aquamarine !important;
+    border-bottom: 0px !important;
+    border-top: 4px solid darkgray !important;
+}

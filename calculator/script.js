@@ -6,9 +6,7 @@ const operators = document.querySelectorAll('.operator');
 const equals = document.querySelector('#equals');
 const clearAC = document.querySelector('#clear');
 
-const inputHistory = [];
-
-let inputArray = [];
+let userInputArray = [0];
 
 let mathOperation = {
     numbers: [],
@@ -19,55 +17,107 @@ let mathOperation = {
 
 digits.forEach(digit => {
     digit.addEventListener('click', () => {
-        inputArray.push(digit.id);
-        displayInput(digit.id);
 
+        console.log(userInputArray)
 
-
-        inputHistory.push(digit.id);
+        if (!isNaN(Number(userInputArray[userInputArray.length - 1]))) {
+            operators.forEach(operator => { operator.classList.remove('active') });
+            userInputArray.push(digit.id);
+            mathOperation.display.push(digit.id);
+            display.textContent = mathOperation.display.join('');
+        } else {
+            cleaDisplay()
+            operators.forEach(operator => { operator.classList.remove('active') });
+            userInputArray.push(digit.id);
+            mathOperation.display.push(digit.id);
+            display.textContent = mathOperation.display.join('');
+        }
     });
 });
 
 operators.forEach(operator => {
     operator.addEventListener('click', () => {
 
-        displayInput(` ${operator.textContent} `);
+        userInputArray.push(operator.id);
 
-        getNumber(inputArray);
-        clearDigitCache();
+        operators.forEach(operator => { operator.classList.remove('active') });
+        operator.classList.toggle('active');
 
+        // getNumber(userInputArray);
+        const number = parseInt(userInputArray.reduce((number, digit) => number + digit));
+        mathOperation.numbers.push(number);
+
+
+        //updateMathOperation(operator.id);
         mathOperation.operant = operator.id;
-        console.log(mathOperation);
+
+        //clearUserInputArray();
+        userInputArray = [];
+
+        function updateMathOperation() {
+            mathOperation.operant = operator.id;
+        }
+
+
     });
 });
 
 equals.addEventListener('click', () => {
-    displayInput(` ${equals.textContent} `);
+    //processUserInput(` ${equals.textContent} `);
+    if (!isNaN(Number(userInputArray[userInputArray.length - 1]))) {
+        cleaDisplay()
+        //getNumber(userInputArray);
+        const number = parseInt(userInputArray.reduce((number, digit) => number + digit));
+        mathOperation.numbers.push(number);
 
-    getNumber(inputArray);
-    clearDigitCache();
+        //clearUserInputArray();
+        userInputArray = [];
 
-    const result = getResult(mathOperation.numbers[mathOperation.numbers.length - 2],
-        mathOperation.numbers[mathOperation.numbers.length - 1],
-        mathOperation.operant);
-    displayResult(result);
+
+        const result = getResult(mathOperation.numbers[mathOperation.numbers.length - 2],
+            mathOperation.numbers[mathOperation.numbers.length - 1],
+            mathOperation.operant);
+
+        //displayResult(result);
+        mathOperation.display.push(result);
+        display.textContent = mathOperation.display.join('');
+
+        mathOperation.numbers.push(result);
+        //const resultConvertToArray = Array.from(String(result), Number);
+        //resultConvertToArray.forEach(digit => { userInputArray.push(result) });
+
+
+    } else {
+        console.log("Error");
+    }
+
 });
 
 clearAC.addEventListener('click', () => {
     clear();
 });
 
-function displayInput(pressedKey) {
 
-    if (!isNaN(Number(pressedKey))) {
-        mathOperation.display.push(pressedKey);
-        display.textContent = mathOperation.display.join('');
+function cleaDisplay() {
+    mathOperation.display = [];
+    display.textContent = mathOperation.display;
+}
+
+function processUserInput(buttonUsed) {
+
+    if (!isNaN(Number(buttonUsed))) {
+        displayUserInput(buttonUsed);
     } else {
         mathOperation.display = [];
     }
 
 
-    //mathOperation.display.push(pressedKey)
+    function displayUserInput(buttonUsed) {
+        mathOperation.display.push(buttonUsed);
+        display.textContent = mathOperation.display.join('');
+    }
+
+    //mathOperation.display.push(buttonUsed)
 }
 
 function displayResult(result) {
@@ -75,13 +125,13 @@ function displayResult(result) {
     display.textContent = mathOperation.display.join('');
 }
 
-function getNumber(inputArray) {
-    const number = parseInt(inputArray.reduce((number, digit) => number + digit));
+function getNumber(userInputArray) {
+    const number = parseInt(userInputArray.reduce((number, digit) => number + digit));
     mathOperation.numbers.push(number);
 }
 
-function clearDigitCache() {
-    inputArray = [];
+function clearUserInputArray() {
+    userInputArray = [];
 }
 
 function getResult(num1, num2, operant) {
@@ -103,9 +153,9 @@ function getResult(num1, num2, operant) {
 }
 
 function clear() {
-    clearDigitCache();
+    clearUserInputArray();
     mathOperation.display = [];
-    displayInput('');
+    processUserInput('');
 }
 
 function add(x, y) {
