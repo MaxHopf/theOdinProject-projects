@@ -1,12 +1,14 @@
 "use strict";
 
 const display = document.querySelector('#display');
-const digits = document.querySelectorAll('.digit');
-const operators = document.querySelectorAll('.operator');
-const equals = document.querySelector('#equals');
-const clearAC = document.querySelector('#clear');
+const keys = document.querySelectorAll('.key')
+//const digits = document.querySelectorAll('.digit');
+//const operators = document.querySelectorAll('.operator');
+//const equals = document.querySelector('#equals');
+//const clearAC = document.querySelector('#clear');
 
-let userInputArray = [0];
+
+//let userInputArray = [0];
 
 let mathOperation = {
     numbers: [],
@@ -14,6 +16,36 @@ let mathOperation = {
     display: [],
     result: null
 }
+
+
+keys.forEach(key => {
+    key.addEventListener('click', () => {
+
+        if (key.className.includes("digit")) {
+
+            console.log(key);
+
+        } else if (key.className.includes("operator")) {
+            console.log(key);
+
+        } else if (key.id.includes("equals")) {
+            console.log(key);
+
+        } else if (key.id.includes("clear")) {
+            console.log(key);
+
+        } else {
+            console.log(key);
+            console.log('ERROR: missing key')
+        }
+
+
+    });
+});
+
+
+
+/*
 
 digits.forEach(digit => {
     digit.addEventListener('click', () => {
@@ -96,6 +128,9 @@ equals.addEventListener('click', () => {
 clearAC.addEventListener('click', () => {
     clear();
 });
+
+
+*/
 
 
 function cleaDisplay() {
