@@ -113,10 +113,6 @@ keys.forEach(key => {
             display.result = result;
             resultDisplay.textContent = display.result;
 
-
-
-            console.log(key);
-
         } else if (key.id.includes("clear")) {
 
             inputCache = [];
@@ -130,11 +126,11 @@ keys.forEach(key => {
             resultDisplay.textContent = display.result;
 
         } else {
+
             console.log(key);
             console.log('ERROR: Missing Button Listener');
+
         }
-
-
     });
 });
 
