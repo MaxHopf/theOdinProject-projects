@@ -23,8 +23,18 @@ keys.forEach(key => {
 
         if (key[`className`].includes("digit")) {
 
-            inputCache.push(key.id);
-            displayInput(key.id);
+            if (equation[`result`] != null) {
+
+                clear();
+                inputCache.push(key.id);
+                displayInput(key.id);
+
+            } else {
+
+                inputCache.push(key.id);
+                displayInput(key.id);
+
+            }
 
         } else if (key[`className`].includes("operator")) {
 
@@ -35,7 +45,6 @@ keys.forEach(key => {
                 displayInput(` ${key[`textContent`]} `);
 
             } else {
-
 
                 if (equation[`result`] != null) {
 
@@ -72,15 +81,7 @@ keys.forEach(key => {
 
         } else if (key[`id`].includes("clear")) {
 
-            inputCache = [];
-            display[`result`] = [];
-            display[`input`] = [];
-            equation[`numbers`] = [];
-            equation[`operant`] = null;
-            equation[`interim`] = null;
-            equation[`result`] = null;
-            inputDisplay[`textContent`] = display[`input`];
-            resultDisplay[`textContent`] = display[`result`];
+            clear();
 
         } else {
 
@@ -165,4 +166,16 @@ function operate(num1, num2, operant) {
             return z = x / y;
         }
     }
+}
+
+function clear() {
+    inputCache = [];
+    display[`result`] = [];
+    display[`input`] = [];
+    equation[`numbers`] = [];
+    equation[`operant`] = null;
+    equation[`interim`] = null;
+    equation[`result`] = null;
+    inputDisplay[`textContent`] = display[`input`];
+    resultDisplay[`textContent`] = display[`result`];
 }
