@@ -45,11 +45,25 @@ button:hover {
 }
 
 div#display {
-    padding: 24px;
+    padding: 8px 16px;
     grid-column: span 4;
     text-align: right;
     background-color: rgb(213, 225, 233);
     border-radius: 8px;
+}
+
+div#display-input {
+    padding: 0;
+    grid-column: span 4;
+    text-align: left;
+    background-color: rgb(213, 225, 233);
+    border-radius: 8px;
+    font-size: 28px;
+    height: 32px;
+}
+
+div#display-result {
+    height: 48px;
 }
 
 button#clear {
