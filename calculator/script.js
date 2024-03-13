@@ -21,60 +21,59 @@ let equation = {
 keys.forEach(key => {
     key.addEventListener('click', () => {
 
-        if (key.className.includes("digit")) {
+        if (key[`className`].includes("digit")) {
 
             inputCache.push(key.id);
             displayInput(key.id);
 
-        } else if (key.className.includes("operator")) {
+        } else if (key[`className`].includes("operator")) {
 
-            if (equation.result != null) {
+            if (equation[`result`] != null) {
 
                 setResultToEquation();
-                equation.operant = key.id;
-                display['input'].push(`${equation.result}`);
+                equation[`operant`] = key[`id`];
+                display['input'].push(`${equation[`result`]}`);
                 displayResult(clearDisplay(`result`));
-                displayInput(` ${key.textContent} `);
-                equation.result = null;
+                displayInput(` ${key[`textContent`]} `);
+                equation[`result`] = null;
 
             } else {
 
                 setUserInputToEquation()
-                if (equation.numbers.length >= 2) {
+                if (equation[`numbers`].length >= 2) {
 
-                    const interim = operate(equation.numbers[equation.numbers.length - 2],
-                        equation.numbers[equation.numbers.length - 1],
-                        equation.operant);
-                    equation.interim = interim;
-                    equation.numbers.push(interim);
+                    const interim = operate(equation[`numbers`][equation[`numbers`].length - 2],
+                        equation[`numbers`][equation[`numbers`].length - 1],
+                        equation[`operant`]);
+                    equation[`interim`] = interim;
+                    equation[`numbers`].push(interim);
 
                 }
-                equation.operant = key.id;
-                displayInput(` ${key.textContent} `);
+                equation[`operant`] = key[`id`];
+                displayInput(` ${key[`textContent`]} `);
 
             }
 
-        } else if (key.id.includes("equals")) {
+        } else if (key[`id`].includes("equals")) {
 
             clearDisplay(`input`);
             setUserInputToEquation();
             displayResult(getResult());
 
-        } else if (key.id.includes("clear")) {
+        } else if (key[`id`].includes("clear")) {
 
             inputCache = [];
-            display.result = [];
-            display.input = [];
-            equation.numbers = [];
-            equation.operant = null;
-            equation.interim = null;
-            equation.result = null;
-            inputDisplay.textContent = display.input;
-            resultDisplay.textContent = display.result;
+            display[`result`] = [];
+            display[`input`] = [];
+            equation[`numbers`] = [];
+            equation[`operant`] = null;
+            equation[`interim`] = null;
+            equation[`result`] = null;
+            inputDisplay[`textContent`] = display[`input`];
+            resultDisplay[`textContent`] = display[`result`];
 
         } else {
 
-            console.log(key);
             console.log('ERROR: Missing Button Listener');
 
         }
@@ -86,12 +85,12 @@ function clearDisplay(selector) {
 }
 
 function setResultToEquation() {
-    equation.numbers.push(equation.result);
+    equation[`numbers`].push(equation[`result`]);
 }
 
 function setUserInputToEquation() {
     const number = parseInt(inputCache.reduce((number, digit) => number + digit));
-    equation.numbers.push(number);
+    equation[`numbers`].push(number);
     clearInputCache();
 
     function clearInputCache() {
@@ -101,19 +100,19 @@ function setUserInputToEquation() {
 
 function displayInput(content) {
     display['input'].push(content);
-    inputDisplay.textContent = display['input'].join('');
+    inputDisplay[`textContent`] = display['input'].join('');
 }
 
 function displayResult(result) {
     display[`result`] = result;
-    resultDisplay.textContent = display[`result`];
+    resultDisplay[`textContent`] = display[`result`];
 }
 
 function getResult() {
-    const result = operate(equation.numbers[equation.numbers.length - 2],
-        equation.numbers[equation.numbers.length - 1],
-        equation.operant);
-    equation.result = result;
+    const result = operate(equation[`numbers`][equation[`numbers`].length - 2],
+        equation[`numbers`][equation[`numbers`].length - 1],
+        equation[`operant`]);
+    equation[`result`] = result;
     return result
 }
 
