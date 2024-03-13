@@ -66,7 +66,7 @@ keys.forEach(key => {
 
 
                 if (equation.numbers.length >= 2) {
-                    const interim = getResult(equation.numbers[equation.numbers.length - 2],
+                    const interim = operate(equation.numbers[equation.numbers.length - 2],
                         equation.numbers[equation.numbers.length - 1],
                         equation.operant);
 
@@ -84,34 +84,11 @@ keys.forEach(key => {
 
             }
 
-
-
         } else if (key.id.includes("equals")) {
 
-            //if (!isNaN(Number(inputCache[inputCache.length - 1]))) {
-
-            //clearDisplay();
-            display['input'] = [];
-            display.textContent = display['input'];
-
-            //setInputNumberIntoEquation
-            const number = parseInt(inputCache.reduce((number, digit) => number + digit));
-            equation.numbers.push(number);
-
-            //clearUserInputArray();
-            inputCache = [];
-
-            const result = getResult(equation.numbers[equation.numbers.length - 2],
-                equation.numbers[equation.numbers.length - 1],
-                equation.operant);
-
-
-            equation.result = result;
-            //equation.numbers.push(result);
-
-            //resultDisplay(result);
-            display.result = result;
-            resultDisplay.textContent = display.result;
+            clearDisplay(`input`);
+            setUserInputToEquation();
+            displayResult(getResult());
 
         } else if (key.id.includes("clear")) {
 
@@ -134,7 +111,34 @@ keys.forEach(key => {
     });
 });
 
-function getResult(num1, num2, operant) {
+function clearDisplay(selector) {
+    display[`${selector}`] = [];
+}
+
+function setUserInputToEquation() {
+    const number = parseInt(inputCache.reduce((number, digit) => number + digit));
+    equation.numbers.push(number);
+    clearInputCache();
+
+    function clearInputCache() {
+        inputCache = [];
+    }
+}
+
+function displayResult(result) {
+    display[`result`] = result;
+    resultDisplay.textContent = display[`result`];
+}
+
+function getResult() {
+    const result = operate(equation.numbers[equation.numbers.length - 2],
+        equation.numbers[equation.numbers.length - 1],
+        equation.operant);
+    equation.result = result;
+    return result
+}
+
+function operate(num1, num2, operant) {
     if (operant == 'add') {
         return add(num1, num2);
     }
@@ -147,7 +151,7 @@ function getResult(num1, num2, operant) {
     else if (operant == 'divide') {
         return divide(num1, num2);
     } else
-        console.log("Error in getResult Function");
+        console.log("Error in operate Function");
 
 
     function add(x, y) {
