@@ -24,63 +24,33 @@ keys.forEach(key => {
         if (key.className.includes("digit")) {
 
             inputCache.push(key.id);
-            //displayNumber
-            display['input'].push(key.id);
-            inputDisplay.textContent = display['input'].join('');
-
-
+            displayInput(key.id);
 
         } else if (key.className.includes("operator")) {
 
-            console.log(Boolean(inputCache));
-            console.log(inputCache);
-
             if (equation.result != null) {
-                console.table(equation);
 
-
-                equation.numbers.push(equation.result);
-
+                setResultToEquation();
                 equation.operant = key.id;
-
-                //displayOperator
                 display['input'].push(`${equation.result}`);
-                display['input'].push(` ${key.textContent} `);
-
-                inputDisplay.textContent = display['input'].join('');
-                resultDisplay.textContent = display[''];
-
+                displayResult(clearDisplay(`result`));
+                displayInput(` ${key.textContent} `);
                 equation.result = null;
-
-
-
 
             } else {
 
-
-                //setInputNumber
-                const number = parseInt(inputCache.reduce((number, digit) => number + digit));
-                equation.numbers.push(number);
-                //clearUserInputArray();
-                inputCache = [];
-
-
+                setUserInputToEquation()
                 if (equation.numbers.length >= 2) {
+
                     const interim = operate(equation.numbers[equation.numbers.length - 2],
                         equation.numbers[equation.numbers.length - 1],
                         equation.operant);
-
-
                     equation.interim = interim;
                     equation.numbers.push(interim);
+
                 }
-
-
                 equation.operant = key.id;
-
-                //displayOperator
-                display['input'].push(` ${key.textContent} `);
-                inputDisplay.textContent = display['input'].join('');
+                displayInput(` ${key.textContent} `);
 
             }
 
@@ -115,6 +85,10 @@ function clearDisplay(selector) {
     display[`${selector}`] = [];
 }
 
+function setResultToEquation() {
+    equation.numbers.push(equation.result);
+}
+
 function setUserInputToEquation() {
     const number = parseInt(inputCache.reduce((number, digit) => number + digit));
     equation.numbers.push(number);
@@ -123,6 +97,11 @@ function setUserInputToEquation() {
     function clearInputCache() {
         inputCache = [];
     }
+}
+
+function displayInput(content) {
+    display['input'].push(content);
+    inputDisplay.textContent = display['input'].join('');
 }
 
 function displayResult(result) {
