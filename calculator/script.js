@@ -117,9 +117,6 @@ keys.forEach(key => {
 
             console.log(key);
 
-
-
-
         } else if (key.id.includes("clear")) {
 
             inputCache = [];
@@ -132,13 +129,9 @@ keys.forEach(key => {
             inputDisplay.textContent = display.input;
             resultDisplay.textContent = display.result;
 
-
-
         } else {
-
             console.log(key);
             console.log('ERROR: Missing Button Listener');
-
         }
 
 
@@ -178,6 +171,10 @@ function getResult(num1, num2, operant) {
 
     function divide(x, y) {
         let z = null;
-        return z = x / y;
+        if (y == 0) {
+            return `Math Error!`
+        } else {
+            return z = x / y;
+        }
     }
 }
