@@ -28,30 +28,40 @@ keys.forEach(key => {
 
         } else if (key[`className`].includes("operator")) {
 
-            if (equation[`result`] != null) {
+            if (isNaN(Number(display[`input`][display[`input`].length - 1])) && display[`input`].length > 0) {
 
-                setResultToEquation();
                 equation[`operant`] = key[`id`];
-                display['input'].push(`${equation[`result`]}`);
-                displayResult(clearDisplay(`result`));
+                display['input'].pop();
                 displayInput(` ${key[`textContent`]} `);
-                equation[`result`] = null;
 
             } else {
 
-                setUserInputToEquation()
-                if (equation[`numbers`].length >= 2) {
 
-                    const interim = operate(equation[`numbers`][equation[`numbers`].length - 2],
-                        equation[`numbers`][equation[`numbers`].length - 1],
-                        equation[`operant`]);
-                    equation[`interim`] = interim;
-                    equation[`numbers`].push(interim);
+                if (equation[`result`] != null) {
+
+                    setResultToEquation();
+                    equation[`operant`] = key[`id`];
+                    display['input'].push(`${equation[`result`]}`);
+                    displayResult(clearDisplay(`result`));
+                    displayInput(` ${key[`textContent`]} `);
+                    equation[`result`] = null;
+
+                } else {
+
+                    setUserInputToEquation()
+                    if (equation[`numbers`].length >= 2) {
+
+                        const interim = operate(equation[`numbers`][equation[`numbers`].length - 2],
+                            equation[`numbers`][equation[`numbers`].length - 1],
+                            equation[`operant`]);
+                        equation[`interim`] = interim;
+                        equation[`numbers`].push(interim);
+
+                    }
+                    equation[`operant`] = key[`id`];
+                    displayInput(` ${key[`textContent`]} `);
 
                 }
-                equation[`operant`] = key[`id`];
-                displayInput(` ${key[`textContent`]} `);
-
             }
 
         } else if (key[`id`].includes("equals")) {
